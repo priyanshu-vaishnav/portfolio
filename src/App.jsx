@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { GitFork, Link2, Mail, Phone, ExternalLink, ChevronDown, Code2, Server, Database, Shield, Wrench, Music, CreditCard, Menu, X } from "lucide-react";
+import { GitFork, Link2, Mail, Phone, ExternalLink, ChevronDown, Code2, Server, Database, Shield, Wrench, Music, CreditCard, Home, Menu, X, Sparkles } from "lucide-react";
 import "./App.css";
 
 const SKILLS = [
@@ -12,6 +12,28 @@ const SKILLS = [
 ];
 
 const PROJECTS = [
+  {
+    id: "bank",
+    icon: <CreditCard size={22}/>,
+    title: "Banking App",
+    subtitle: "Full Stack · MERN",
+    desc: "A production-grade banking system with real-time ledger transactions, multi-currency account management, email notifications on every transaction, and a secure JWT-protected dashboard.",
+    features: [
+      "JWT authentication & session management",
+      "Account balance, status & currency tracking",
+      "Send Money with real-time ledger recording",
+      "DEBIT/CREDIT history with filtering",
+      "Email notification on every transaction (Nodemailer)",
+      "Responsive dashboard UI",
+    ],
+    tech: ["React.js", "Node.js", "Express.js", "MongoDB", "JWT", "Nodemailer"],
+    link: "https://github.com/priyanshu-vaishnav/banksystem",
+    liveLink: "https://banksystem-blush.vercel.app/",
+    accent: "#059669",
+    accentLight: "rgba(5,150,105,0.08)",
+    gradient: "linear-gradient(135deg, rgba(5,150,105,0.13) 0%, rgba(13,148,132,0.13) 100%)",
+    aiGenerated: false,
+  },
   {
     id: "music",
     icon: <Music size={22}/>,
@@ -26,31 +48,33 @@ const PROJECTS = [
       "Secure JWT authentication",
       "Responsive, modern UI with CSS3",
     ],
-    tech: ["React.js", "Node.js", "Express.js", "MongoDB", "CSS3", "JWT"],
+    tech: ["React.js", "Node.js", "Express.js", "MongoDB", "JWT", "CSS3"],
     link: "https://github.com/priyanshu-vaishnav/MusicApp",
+    liveLink: "https://musicplayer-chi-woad.vercel.app/",
     accent: "#7C3AED",
     accentLight: "rgba(124,58,237,0.08)",
     gradient: "linear-gradient(135deg, rgba(124,58,237,0.13) 0%, rgba(79,70,229,0.13) 100%)",
+    aiGenerated: false,
   },
   {
-    id: "bank",
-    icon: <CreditCard size={22}/>,
-    title: "Banking App",
-    subtitle: "Full Stack · MERN",
-    desc: "A production-grade banking system with real-time ledger transactions, multi-currency account management, email notifications, and a secure JWT-protected dashboard.",
+    id: "decor",
+    icon: <Home size={22}/>,
+    title: "DecorHub",
+    subtitle: "Frontend · AI-Generated",
+    desc: "A modern interior design showcase website — fully designed and built using AI tools. Every layout, component, and visual crafted end-to-end with AI assistance.",
     features: [
-      "JWT authentication & session management",
-      "Account balance, status & currency tracking",
-      "Send Money with real-time ledger recording",
-      "DEBIT/CREDIT history with filtering",
-      "Email notification on every transaction",
-      "Responsive dashboard UI",
+      "Complete UI designed & built using AI",
+      "Modern responsive layout",
+      "Interior design product showcase",
+      "Clean component architecture",
     ],
-    tech: ["React.js", "Node.js", "Express.js", "MongoDB", "JWT"],
-    link: "https://github.com/priyanshu-vaishnav/banksystem",
-    accent: "#059669",
-    accentLight: "rgba(5,150,105,0.08)",
-    gradient: "linear-gradient(135deg, rgba(5,150,105,0.13) 0%, rgba(13,148,132,0.13) 100%)",
+    tech: ["React.js", "CSS3", "AI-Generated"],
+    link: null,
+    liveLink: "https://decorhub-ruddy.vercel.app/",
+    accent: "#D85A30",
+    accentLight: "rgba(216,90,48,0.08)",
+    gradient: "linear-gradient(135deg, rgba(216,90,48,0.13) 0%, rgba(185,60,20,0.13) 100%)",
+    aiGenerated: true,
   },
 ];
 
@@ -146,7 +170,7 @@ function Hero() {
           </a>
         </motion.div>
         <motion.div className="hero-stats" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 0.8 }}>
-          {[["2", "Full-Stack Projects"], ["5+", "Technologies"], ["2025", "BCA Graduate"]].map(([n, l]) => (
+          {[["3", "Projects"], ["5+", "Technologies"], ["2025", "BCA Graduate"]].map(([n, l]) => (
             <div key={l} className="stat">
               <span className="stat-num">{n}</span>
               <span className="stat-label">{l}</span>
@@ -218,19 +242,61 @@ function Skills() {
 function ProjectCard({ p, i }) {
   const [hovered, setHovered] = useState(false);
   return (
-    <motion.div className="project-card" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15, duration: 0.7 }} onHoverStart={() => setHovered(true)} onHoverEnd={() => setHovered(false)} style={{ "--accent": p.accent, "--accent-light": p.accentLight }}>
+    <motion.div
+      className="project-card"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: i * 0.15, duration: 0.7 }}
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
+      style={{ "--accent": p.accent, "--accent-light": p.accentLight }}
+    >
       <div className="project-card-bg" style={{ background: p.gradient }}/>
+
+      {p.aiGenerated && (
+        <div className="ai-badge">
+          <Sparkles size={11}/> Built with AI
+        </div>
+      )}
+
       <div className="project-header">
         <div className="project-icon-wrap" style={{ background: p.accentLight, color: p.accent }}>{p.icon}</div>
         <div>
           <h3>{p.title}</h3>
           <span className="project-subtitle">{p.subtitle}</span>
         </div>
-        <motion.a href={p.link} target="_blank" rel="noreferrer" className="project-github-link" animate={{ x: hovered ? 0 : 4, opacity: hovered ? 1 : 0.4 }}>
-          <GitFork size={17}/><ExternalLink size={13}/>
-        </motion.a>
+        <div className="project-header-links">
+          {p.liveLink && (
+            <motion.a
+              href={p.liveLink}
+              target="_blank"
+              rel="noreferrer"
+              className="project-live-link"
+              style={{ color: p.accent, borderColor: p.accent }}
+              animate={{ x: hovered ? 0 : 4, opacity: hovered ? 1 : 0.5 }}
+              title="Live Demo"
+            >
+              <ExternalLink size={13}/> Live
+            </motion.a>
+          )}
+          {p.link && (
+            <motion.a
+              href={p.link}
+              target="_blank"
+              rel="noreferrer"
+              className="project-github-link"
+              animate={{ x: hovered ? 0 : 4, opacity: hovered ? 1 : 0.4 }}
+              title="GitHub"
+            >
+              <GitFork size={17}/><ExternalLink size={13}/>
+            </motion.a>
+          )}
+        </div>
       </div>
+
       <p className="project-desc">{p.desc}</p>
+
       <ul className="project-features">
         {p.features.map((f, idx) => (
           <motion.li key={f} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: 0.05 * idx }}>
@@ -239,12 +305,23 @@ function ProjectCard({ p, i }) {
           </motion.li>
         ))}
       </ul>
+
       <div className="project-tech">
         {p.tech.map(t => <span key={t} className="tech-badge" style={{ color: p.accent, background: p.accentLight }}>{t}</span>)}
       </div>
-      <a href={p.link} target="_blank" rel="noreferrer" className="project-cta" style={{ color: p.accent }}>
-        View on GitHub <ExternalLink size={13}/>
-      </a>
+
+      <div className="project-footer">
+        {p.liveLink && (
+          <a href={p.liveLink} target="_blank" rel="noreferrer" className="project-cta" style={{ color: p.accent }}>
+            View Live <ExternalLink size={13}/>
+          </a>
+        )}
+        {p.link && (
+          <a href={p.link} target="_blank" rel="noreferrer" className="project-cta-ghost">
+            GitHub <GitFork size={13}/>
+          </a>
+        )}
+      </div>
     </motion.div>
   );
 }
@@ -333,7 +410,7 @@ export default function App() {
       <footer className="footer">
         <div className="container">
           <span>© 2025 Priyanshu Vaishnav</span>
-          <span>Built with React + Framer Motion</span>
+          <span>Built with React</span>
           <span>Durg, Chhattisgarh 🇮🇳</span>
         </div>
       </footer>
