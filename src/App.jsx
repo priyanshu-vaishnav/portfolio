@@ -151,7 +151,7 @@ function Hero() {
       </div>
       <motion.div className="hero-content" style={{ y, opacity }}>
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.8 }} className="hero-eyebrow">
-          <span className="dot pulse"/>
+          
           Available for opportunities
         </motion.div>
         <motion.h1 initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.9 }}>
