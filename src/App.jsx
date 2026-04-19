@@ -349,8 +349,8 @@ function Projects() {
 
 function Education() {
   const items = [
-    { icon: "🎓", title: "Bachelor of Computer Applications (BCA)", place: "Kalyan College, Bhilai, Chhattisgarh", detail: "59.6%", year: "2025", type: "edu" },
-    { icon: "⚡", title: "Full Stack Web Development — MERN Stack", place: "Aavish EduCom, Durg", detail: "Hands-on training — Banking App & Music Player", year: "2025", type: "cert" },
+    { icon: "🎓", title: "Bachelor of Computer Applications (BCA)", place: "Kalyan College, Bhilai, Chhattisgarh", detail: "59.6%", year: "2022 - 2025", type: "edu" },
+    { icon: "⚡", title: "Full Stack Web Development — MERN Stack", place: "Aavish EduCom, Durg", detail: "Hands-on training — Banking App & Music Player", year: "2025 - 2026", type: "cert" },
   ];
   return (
     <section id="education" className="education-section">
